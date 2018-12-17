@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.EmailValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,9 @@ import java.io.IOException;
 
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
+
+    EmailValidator ev = new EmailValidator();
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO: show the registration form
         if (request.getSession().getAttribute("user") != null) {
@@ -30,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("password-confirm");
 
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || !passwordConfirm.equals(password)) {
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || !passwordConfirm.equals(password) || !ev.validateEmail(email)) {
             response.sendRedirect("/register");
         } else {
             User user = new User (username, email, password);
