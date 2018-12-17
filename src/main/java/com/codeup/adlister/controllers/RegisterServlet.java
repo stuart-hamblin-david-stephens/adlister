@@ -3,6 +3,7 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
 import com.codeup.adlister.EmailValidator;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || !passwordConfirm.equals(password) || !ev.validateEmail(email)) {
             response.sendRedirect("/register");
         } else {
-            User user = new User (username, email, password);
+            User user = new User (username, email, BCrypt.hashpw(password, BCrypt.gensalt()));
             DaoFactory.getUsersDao().insert(user);
             try {
                 if (DaoFactory.getUsersDao().findByUsername(user.getUsername()) != null) {
