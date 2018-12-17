@@ -23,11 +23,19 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <textarea id="email" name="email" class="form-control" type="text" placeholder="${sessionScope.email}"></textarea>
+                <input id="email" name="email" class="form-control" type="text" placeholder="${sessionScope.email}">
+            </div>
+            <div class="form-group">
+                <label for="current-password">Current Password</label>
+                <input id="current-password" name="current-password" class="form-control" type="password">
             </div>
             <div class="form-group">
                 <label for="password">New Password</label>
-                <textarea id="password" name="password" class="form-control" type="password"></textarea>
+                <input id="password" name="password" class="form-control" type="password">
+            </div>
+            <div class="form-group">
+                <label for="password-confirm">Confirm New Password</label>
+                <input id="password-confirm" name="password-confirm" class="form-control" type="password">
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
