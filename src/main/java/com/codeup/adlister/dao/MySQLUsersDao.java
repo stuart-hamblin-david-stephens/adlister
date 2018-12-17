@@ -3,6 +3,7 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.Config;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class MySQLUsersDao implements Users {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPassword());
+            stmt.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             bill = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,6 +61,7 @@ public class MySQLUsersDao implements Users {
     }
 
     public static void main(String[] args) {
-        System.out.println(new MySQLUsersDao(new Config()).findByUsername("BigBill").getUsername());
+        DaoFactory.getUsersDao().insert(new User("Jim", "NewJim@oldjim.com", "sonic5"));
+        System.out.println(BCrypt.checkpw("sonic5", DaoFactory.getUsersDao().findByUsername("Jim").getPassword()));
     }
 }
