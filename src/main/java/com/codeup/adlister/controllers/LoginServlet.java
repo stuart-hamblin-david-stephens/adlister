@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
                 User user = DaoFactory.getUsersDao().findByUsername(username);
                 if (BCrypt.checkpw(password, user.getPassword())) {
                     request.getSession().setAttribute("user", user.getUsername());
+                    request.getSession().setAttribute("email", user.getEmail());
                     response.sendRedirect("/profile");
                 } else {
                     response.sendRedirect("/login");
