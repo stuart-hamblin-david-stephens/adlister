@@ -1,5 +1,7 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.DaoFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,10 @@ public class ViewProfileServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+
+        String currentUser = (String) request.getSession().getAttribute("user");
+        System.out.println(currentUser);
+        request.setAttribute("userAds", DaoFactory.getAdsDao().adsByUser(currentUser));
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
 }

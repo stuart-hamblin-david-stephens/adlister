@@ -78,4 +78,26 @@ public class MySQLAdsDao implements Ads {
         }
         return bill;
     }
+
+    @Override
+    public List<Ad> adsByUser(String username) {
+        List<Ad> userAds = new ArrayList<>();
+        PreparedStatement stmt;
+        String sql = "SELECT * FROM ads WHERE user_id = ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, DaoFactory.getUsersDao().findByUsername(username).getId());
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                userAds.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userAds;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(DaoFactory.getAdsDao().adsByUser("stuart"));
+    }
 }
