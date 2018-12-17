@@ -38,7 +38,7 @@ public class RegisterServlet extends HttpServlet {
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || !passwordConfirm.equals(password) || !ev.validateEmail(email)) {
             response.sendRedirect("/register");
         } else {
-            User user = new User (username, email, BCrypt.hashpw(password, BCrypt.gensalt()));
+            User user = new User (username, email, password);
             DaoFactory.getUsersDao().insert(user);
             try {
                 if (DaoFactory.getUsersDao().findByUsername(user.getUsername()) != null) {
