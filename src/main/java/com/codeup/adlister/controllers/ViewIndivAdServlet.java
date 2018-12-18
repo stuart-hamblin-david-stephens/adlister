@@ -9,16 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/ads")
-public class AdsIndexServlet extends HttpServlet {
+@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/ads/view")
+public class ViewIndivAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.removeAttribute("ad");
-        request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ads/view-ad.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().setAttribute("ad", DaoFactory.getAdsDao().findAdById((Long.parseLong(request.getParameter("ad_id")))));
-        response.sendRedirect("/ads/view");
+        request.getSession().getAttribute("ad");
+        request.getRequestDispatcher("/WEB-INF/ads/view-ad.jsp").forward(request, response);
     }
 }
