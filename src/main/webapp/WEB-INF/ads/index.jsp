@@ -13,7 +13,7 @@
     <h1>Here Are all the ads!</h1>
 
     <c:forEach var="ad" items="${ads}">
-        <form name="submit-for-${ad.id}" action="/ads" method="post">
+        <form id="submit-for-${ad.id}" action="" method="post">
             <div class="col-md-6" onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
                 <h2>${ad.title}</h2>
                 <p>${ad.description}</p>
