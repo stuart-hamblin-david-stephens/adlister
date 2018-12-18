@@ -24,3 +24,16 @@ CREATE TABLE IF NOT EXISTS ads (
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
+
+CREATE TABLE IF NOT EXISTS categories (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS ad_categories (
+  cat_id INT UNSIGNED,
+  ad_id INT UNSIGNED,
+  FOREIGN KEY (cat_id) REFERENCES categories (id),
+  FOREIGN KEY (ad_id) REFERENCES ads (id)
+)
