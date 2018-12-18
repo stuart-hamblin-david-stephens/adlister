@@ -60,8 +60,20 @@ public class MySQLUsersDao implements Users {
         return bill;
     }
 
-    public static void main(String[] args) {
-        DaoFactory.getUsersDao().insert(new User("Jim", "NewJim@oldjim.com", "sonic5"));
-        System.out.println(BCrypt.checkpw("sonic5", DaoFactory.getUsersDao().findByUsername("Jim").getPassword()));
+    @Override
+    public Long updateProfile(String oldUsername, String newUsername, String newEmail, String newPassword) {
+        long output = 0;
+        String sql = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, newUsername);
+            stmt.setString(2, newEmail);
+            stmt.setString(3, newPassword);
+            stmt.setLong(4, findByUsername(oldUsername).getId());
+            output = stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return output;
     }
 }

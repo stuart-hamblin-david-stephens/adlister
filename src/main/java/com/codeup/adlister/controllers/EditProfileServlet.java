@@ -1,9 +1,6 @@
 package com.codeup.adlister.controllers;
 
-import com.codeup.adlister.Config;
-import com.codeup.adlister.EmailValidator;
 import com.codeup.adlister.dao.DaoFactory;
-import com.codeup.adlister.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
@@ -13,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "EditProfileServlet", urlPatterns = "/edit-profile")
+@WebServlet(urlPatterns = "/edit-profile")
 public class EditProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,29 +24,28 @@ public class EditProfileServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("password-confirm");
 
-        User user = DaoFactory.getUsersDao().findByUsername(username);
-        EmailValidator ev = new EmailValidator();
-        if(!username.isEmpty()){
-            user.setUsername(username);
+        if(username.isEmpty()){
+            username = (String) request.getSession().getAttribute("user");
         }
 
-        if(!email.isEmpty()){
-            if(!ev.validateEmail(email)){
-                response.sendRedirect("/register");
+        if(email.isEmpty()){
+            email = (String) request.getSession().getAttribute("email");
+        }
+
+        if(!currentPassword.equals(DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword())) {
+            password = DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword();
+        } else {
+            if(!password.equals(passwordConfirm)){
+                password = DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword();
             } else {
-                user.setEmail(email);
+                password = BCrypt.hashpw(password, BCrypt.gensalt());
             }
         }
 
-        if(!currentPassword.isEmpty()){
-            if(BCrypt.checkpw(password, user.getPassword())){
-                if(passwordConfirm.equals(password)){
-                    user.setPassword(password);
-                    response.sendRedirect("/edit-profile");
-                } else {
-                    response.sendRedirect("/edit-profile");
-                }
-            }
-        }
+        String oldUsername = (String) request.getSession().getAttribute("user");
+        DaoFactory.getUsersDao().updateProfile(oldUsername, username, email, password);
+        request.getSession().setAttribute("user", username);
+        request.getSession().setAttribute("email", email);
+        response.sendRedirect("/edit-profile");
     }
 }
