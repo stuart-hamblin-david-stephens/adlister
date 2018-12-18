@@ -13,10 +13,13 @@
     <h1>Here Are all the ads!</h1>
 
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
-        </div>
+        <form id="submit-for-${ad.id}" action="" method="post">
+            <div class="col-md-6" onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
+                <h2>${ad.title}</h2>
+                <p>${ad.description}</p>
+                <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
+            </div>
+        </form>
     </c:forEach>
 </div>
 
