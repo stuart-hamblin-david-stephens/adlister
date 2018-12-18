@@ -8,4 +8,4 @@ INSERT INTO ads (user_id, title, description) VALUES (1,'Free Frisbee', 'Free, l
 
 SELECT * FROM ads;
 
-INSERT INTO categories (title) VALUES ();
+INSERT INTO categories (title) VALUES ('Plumber'), ('Carpenter'), ('Landscaper'), ('Construction'), ('Car Repair'), ('Electrician'), ('HVAC Technician'), ('Appliance Repair'), ('Computer Repair'), ('Irrigation'), ('Pool Care'), ('General Handywork');
