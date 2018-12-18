@@ -7,12 +7,13 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <c:choose>
-                <c:when test="${sessionScope.user.isEmpty()}}">
-                    <li><a href="/register">Register</a></li>
-                    <li><a href="/login">Login</a></li>
+                <c:when test="${not empty sessionScope.user}">
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="/logout">Logout</a></li
+                    <li><a href="/register">Register</a></li>
+                    <li><a href="/login">Login</a></li>
                 </c:otherwise>
             </c:choose>
         </ul>
