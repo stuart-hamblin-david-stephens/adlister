@@ -1,6 +1,7 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.Config;
+import com.codeup.adlister.EmailValidator;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
 import org.mindrot.jbcrypt.BCrypt;
@@ -25,15 +26,21 @@ public class EditProfileServlet extends HttpServlet {
         String currentPassword = request.getParameter("current-password");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("password-confirm");
-//        TODO
-//        if(!username.isEmpty()){
-//
-//        }
-//        TODO
-//        if(!email.isEmpty()){
-//
-//        }
+
         User user = DaoFactory.getUsersDao().findByUsername(username);
+        EmailValidator ev = new EmailValidator();
+        if(!username.isEmpty()){
+            user.setUsername(username);
+        }
+
+        if(!email.isEmpty()){
+            if(!ev.validateEmail(email)){
+                response.sendRedirect("/register");
+            } else {
+                user.setEmail(email);
+            }
+        }
+
         if(!currentPassword.isEmpty()){
             if(BCrypt.checkpw(password, user.getPassword())){
                 if(passwordConfirm.equals(password)){
