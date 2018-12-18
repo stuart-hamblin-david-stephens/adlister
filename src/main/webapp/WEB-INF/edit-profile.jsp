@@ -14,6 +14,7 @@
     </jsp:include>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
         <h1>Edit Profile</h1>
         <form action="/edit-profile" method="post">
