@@ -12,8 +12,8 @@
         <jsp:param name="title" value="Your Profile" />
     </jsp:include>
 </head>
-<body>
+<body class="body-text">
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-    <h2>Edit the ad!</h2>
+    <h2 class="head-text">Edit the ad!</h2>
 </body>
 </html>

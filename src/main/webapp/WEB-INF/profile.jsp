@@ -6,19 +6,19 @@
         <jsp:param name="title" value="Your Profile" />
     </jsp:include>
 </head>
-<body>
+<body class="body-text">
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
     <div class="container">
-    <h1>Welcome, ${sessionScope.user}!</h1> <a href="/profile/edit">Edit Profile</a>
-    <h2>Your current ads</h2>
+    <h1 class="head-text">Welcome, ${sessionScope.user}!</h1> <a href="/profile/edit">Edit Profile</a>
+    <h2 class="head-text">Your current ads</h2>
         <%!  %>
         <c:forEach var="ad" items="${userAds}">
             <div class="col-md-6">
                 <div class="col-md-12 px-0">
                     <form id="submit-for-${ad.id}" action="" method="post">
                         <div onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
-                            <h2>${ad.title}</h2>
+                            <h2 class="head-text">${ad.title}</h2>
                             <p>${ad.description}</p>
                             <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
                         </div>
@@ -29,7 +29,7 @@
                     <div class="col-md-2">
                         <form action="/ads/delete" method="post" id="delete-for-${ad.id}">
                             <input type="hidden" name="ad_id" value="${ad.id}">
-                            <button type="submit">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>

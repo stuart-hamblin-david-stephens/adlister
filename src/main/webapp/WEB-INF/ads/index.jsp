@@ -14,8 +14,8 @@
     <c:forEach var="ad" items="${ads}">
         <form id="submit-for-${ad.id}" action="" method="post">
             <div class="col-md-6" onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
-                <h2>${ad.title}</h2>
-                <p>${ad.description}</p>
+                <h2 class="head-text">${ad.title}</h2>
+                <p class="body-text">${ad.description}</p>
                 <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
             </div>
         </form>
