@@ -27,6 +27,22 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    public List<User> all() {
+        List<User> users = new ArrayList<>();
+        PreparedStatement stmt;
+        String sql = "SELECT * FROM users";
+        try {
+            stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                users.add(new User(rs.getLong("id"), rs.getString("username"), rs.getString("email"), rs.getString("password")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     @Override
     public User findByUsername(String username) {
         List<User> users = new ArrayList<>();
@@ -93,6 +109,8 @@ public class MySQLUsersDao implements Users {
         }
         return output;
     }
+
+
 
     public static void main(String[] args) {
         System.out.println(DaoFactory.getUsersDao().findByEmail("NewBill@jim.com").getUsername());

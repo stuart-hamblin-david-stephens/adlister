@@ -2,10 +2,13 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/ads">Adlister</a>
+        <div class="navbar-header head-text">
+            <a class="navbar-brand" href="/ads">
+                <img src="<%= request.getContextPath()%>/img/sticker-logo.png" alt="funny octoman" class="logo">
+                <p class="text-logo">Fixer Lister</p>
+            </a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right head-text">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <li><a href="/profile">Profile</a></li>
