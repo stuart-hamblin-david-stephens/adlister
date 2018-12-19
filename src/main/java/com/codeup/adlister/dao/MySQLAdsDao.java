@@ -117,6 +117,7 @@ public class MySQLAdsDao implements Ads {
         return result;
     }
 
+    @Override
     public Long deleteAd(long id){
         Long result = 0L;
         PreparedStatement stmt;
