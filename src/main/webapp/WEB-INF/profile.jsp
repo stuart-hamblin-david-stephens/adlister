@@ -19,6 +19,14 @@
                     <h2>${ad.title}</h2>
                     <p>${ad.description}</p>
                     <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="/ad/edit">Edit Ad</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/ad/delete">Delete Ad</a>
+                        </div>
+                    </div>
                 </div>
             </form>
         </c:forEach>
