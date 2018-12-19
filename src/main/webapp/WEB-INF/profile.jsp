@@ -24,7 +24,10 @@
                         </div>
                     </form>
                     <div class="col-md-2">
-                        <a href="/ad/edit">Edit Ad</a>
+                        <form action="/ads/edit" method="post" id="edit-for-${ad.id}">
+                            <input type="hidden" name="ad_id" value="${ad.id}">
+                            <button type="submit" class="btn btn-warning">Edit</button>
+                        </form>
                     </div>
                     <div class="col-md-2">
                         <form action="/ads/delete" method="post" id="delete-for-${ad.id}">
