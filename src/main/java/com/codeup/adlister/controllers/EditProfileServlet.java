@@ -29,11 +29,11 @@ public class EditProfileServlet extends HttpServlet {
 
         boolean validPass = BCrypt.checkpw(currentPassword, DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword());
 
-        if (username.isEmpty() || DaoFactory.getUsersDao().findByUsername(username).getUsername().equals(username)) {
+        if (username.isEmpty() || DaoFactory.getUsersDao().findByUsername(username).getUsername().equals(username) || !validPass) {
             username = (String) request.getSession().getAttribute("user");
         }
 
-        if (email.isEmpty() || !ev.validateEmail(email) || DaoFactory.getUsersDao().findByEmail(email).getEmail().equals(email)) {
+        if (email.isEmpty() || !ev.validateEmail(email) || DaoFactory.getUsersDao().findByEmail(email).getEmail().equals(email) || !validPass) {
             email = (String) request.getSession().getAttribute("email");
         }
 
