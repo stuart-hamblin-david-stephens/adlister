@@ -27,7 +27,7 @@
                 <input id="email" name="email" class="form-control" type="text" placeholder="${sessionScope.email}">
             </div>
             <div class="form-group">
-                <label for="current-password">Current Password</label>
+                <label for="current-password">Current Password *</label>
                 <input id="current-password" name="current-password" class="form-control" type="password">
             </div>
             <div class="form-group">
@@ -40,6 +40,9 @@
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
+    </div>
+    <div class="">
+        * = required field
     </div>
 </body>
 </html>

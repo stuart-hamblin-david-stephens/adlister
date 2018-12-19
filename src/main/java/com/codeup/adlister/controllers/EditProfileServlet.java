@@ -1,5 +1,6 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.EmailValidator;
 import com.codeup.adlister.dao.DaoFactory;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -18,21 +19,25 @@ public class EditProfileServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        EmailValidator ev = new EmailValidator();
+
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String currentPassword = request.getParameter("current-password");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("password-confirm");
 
+        boolean validPass = BCrypt.checkpw(currentPassword, DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword());
+
         if(username.isEmpty()){
             username = (String) request.getSession().getAttribute("user");
         }
 
-        if(email.isEmpty()){
+        if(email.isEmpty() || !ev.validateEmail(email)){
             email = (String) request.getSession().getAttribute("email");
         }
 
-        if(!currentPassword.equals(DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword())) {
+        if(!validPass) {
             password = DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword();
         } else {
             if(!password.equals(passwordConfirm)){
