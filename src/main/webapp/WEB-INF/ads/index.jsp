@@ -11,7 +11,6 @@
 
 <div class="container">
     <h1>Here Are all the ads!</h1>
-
     <c:forEach var="ad" items="${ads}">
         <form id="submit-for-${ad.id}" action="" method="post">
             <div class="col-md-6" onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
