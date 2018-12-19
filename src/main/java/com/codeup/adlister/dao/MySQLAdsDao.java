@@ -117,7 +117,15 @@ public class MySQLAdsDao implements Ads {
         return result;
     }
 
-    public static void main(String[] args) {
-//        System.out.println(DaoFactory.getAdsDao().findAdById(3L).getTitle());
-    }
+//    public void deleteAd(long id){
+//        PreparedStatement stmt;
+//        String sql = "DELETE FROM ads WHERE id = ?";
+//        try {
+//            stmt = conn.prepareStatement(sql);
+//            stmt.setLong(1, id);
+//            ResultSet rs =
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
