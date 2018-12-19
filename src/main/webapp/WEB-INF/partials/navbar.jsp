@@ -12,6 +12,7 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <li><a href="/profile">Profile</a></li>
+                    <li><a href="/ads/create">Create New Ad</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </c:when>
                 <c:otherwise>

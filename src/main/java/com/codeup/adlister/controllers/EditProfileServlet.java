@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/edit-profile")
+@WebServlet(urlPatterns = "/profile/edit")
 public class EditProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,19 +29,19 @@ public class EditProfileServlet extends HttpServlet {
 
         boolean validPass = BCrypt.checkpw(currentPassword, DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword());
 
-        if(username.isEmpty()){
+        if (username.isEmpty() || DaoFactory.getUsersDao().findByUsername(username).getUsername().equals(username)) {
             username = (String) request.getSession().getAttribute("user");
         }
 
-        if(email.isEmpty() || !ev.validateEmail(email)){
+        if (email.isEmpty() || !ev.validateEmail(email) || DaoFactory.getUsersDao().findByEmail(email).getEmail().equals(email)) {
             email = (String) request.getSession().getAttribute("email");
         }
 
-        if(!validPass) {
-            password = DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword();
+        if (!validPass) {
+            password = DaoFactory.getUsersDao().findByUsername((String) request.getSession().getAttribute("user")).getPassword();
         } else {
-            if(!password.equals(passwordConfirm)){
-                password = DaoFactory.getUsersDao().findByUsername((String)request.getSession().getAttribute("user")).getPassword();
+            if (!password.equals(passwordConfirm)) {
+                password = DaoFactory.getUsersDao().findByUsername((String) request.getSession().getAttribute("user")).getPassword();
             } else {
                 password = BCrypt.hashpw(password, BCrypt.gensalt());
             }
@@ -51,6 +51,6 @@ public class EditProfileServlet extends HttpServlet {
         DaoFactory.getUsersDao().updateProfile(oldUsername, username, email, password);
         request.getSession().setAttribute("user", username);
         request.getSession().setAttribute("email", email);
-        response.sendRedirect("/edit-profile");
+        response.sendRedirect("/profile/edit");
     }
 }
