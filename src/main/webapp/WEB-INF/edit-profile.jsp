@@ -20,11 +20,11 @@
         <form action="/profile/edit" method="post">
             <div class="form-group">
                 <label for="username" >Username</label>
-                <input id="username" name="username" class="form-control" type="text" placeholder="${sessionScope.user}">
+                <input id="username" name="username" class="form-control" type="text" value="${sessionScope.user}">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" name="email" class="form-control" type="text" placeholder="${sessionScope.email}">
+                <input id="email" name="email" class="form-control" type="text" value="${sessionScope.email}">
             </div>
             <div class="form-group">
                 <label for="current-password">Current Password *</label>
@@ -40,9 +40,9 @@
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
-    </div>
-    <div class="">
-        * = required field
+        <div class="text-right text-muted">
+            * = required field
+        </div>
     </div>
 </body>
 </html>
