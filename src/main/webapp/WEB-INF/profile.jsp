@@ -14,21 +14,26 @@
     <h2>Your current ads</h2>
         <%!  %>
         <c:forEach var="ad" items="${userAds}">
-            <form id="submit-for-${ad.id}" action="" method="post">
-                <div class="col-md-6" onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
-                    <h2>${ad.title}</h2>
-                    <p>${ad.description}</p>
-                    <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <a href="/ad/edit">Edit Ad</a>
+            <div class="col-md-6">
+                <div class="col-md-12 px-0">
+                    <form id="submit-for-${ad.id}" action="" method="post">
+                        <div onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
+                            <h2>${ad.title}</h2>
+                            <p>${ad.description}</p>
+                            <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
                         </div>
-                        <div class="col-md-3">
-                            <a href="/ad/delete">Delete Ad</a>
-                        </div>
+                    </form>
+                    <div class="col-md-2">
+                        <a href="/ad/edit">Edit Ad</a>
+                    </div>
+                    <div class="col-md-2">
+                        <form action="/ads/delete" method="post" id="delete-for-${ad.id}">
+                            <input type="hidden" name="ad_id" value="${ad.id}">
+                            <button type="submit">Delete</button>
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </c:forEach>
     </div>
 </body>
