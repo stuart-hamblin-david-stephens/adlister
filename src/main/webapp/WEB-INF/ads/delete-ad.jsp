@@ -15,10 +15,14 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
-    <form action="/ads/delete" method="post">
+    <form action="/ads/delete/confirm" method="post">
         <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
-        <h2>Are you sure you want to delete this ad?</h2>
-        <input type="submit" value="Yes. Delete this ad." class="col-md-3 btn btn-block btn-primary">
+            <div class="col-md-12">
+                <h2>Are you sure you want to delete this ad?</h2>
+            </div>
+            <div class="col-md-4">
+                <input type="submit" value="Yes. Delete this ad." class="col-md-3 btn btn-block btn-primary">
+            </div>
     </form>
 </div>
 </body>
