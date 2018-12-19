@@ -13,10 +13,10 @@
         <jsp:param name="title" value="Edit Profile" />
     </jsp:include>
 </head>
-<body>
+<body class="body-text">
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>Edit Profile</h1>
+        <h1 class="head-text">Edit Profile</h1>
         <form action="/profile/edit" method="post">
             <div class="form-group">
                 <label for="username" >Username</label>
