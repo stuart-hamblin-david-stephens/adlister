@@ -12,10 +12,10 @@
         <jsp:param name="title" value="Please Register" />
     </jsp:include>
 </head>
-<body>
+<body class="body-text">
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>Please Log In</h1>
+        <h1 class="head-text">Please Register</h1>
         <form action="/register" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>

@@ -5,10 +5,10 @@
         <jsp:param name="title" value="Create a new Ad" />
     </jsp:include>
 </head>
-<body>
+<body class="body-text">
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>Create a new Ad</h1>
+        <h1 class="head-text">Create a new Ad</h1>
         <form action="/ads/create" method="post">
             <div class="form-group">
                 <label for="title">Title</label>

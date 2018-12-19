@@ -6,7 +6,7 @@
         <jsp:param name="title" value="Viewing All The Ads" />
     </jsp:include>
 </head>
-<body>
+<body class="body-text">
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
@@ -15,7 +15,7 @@
         <form id="submit-for-${ad.id}" action="" method="post">
             <div class="col-md-6" onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
                 <h2 class="head-text">${ad.title}</h2>
-                <p class="body-text">${ad.description}</p>
+                <p>${ad.description}</p>
                 <input type="hidden" name="ad_id" value="${ad.id}" style="display: none">
             </div>
         </form>
