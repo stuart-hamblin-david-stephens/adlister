@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
 
-    EmailValidator ev = new EmailValidator();
+    private EmailValidator ev = new EmailValidator();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO: show the registration form
@@ -35,21 +35,25 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("password-confirm");
 
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || !passwordConfirm.equals(password) || !ev.validateEmail(email)) {
-            response.sendRedirect("/register");
-        } else {
-            User user = new User (username, email, password);
-            DaoFactory.getUsersDao().insert(user);
-            try {
-                if (DaoFactory.getUsersDao().findByUsername(user.getUsername()) != null) {
-                    request.getSession().setAttribute("user", user.getUsername());
-                    response.sendRedirect("/profile");
-                } else {
+        try {
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || !passwordConfirm.equals(password) || !ev.validateEmail(email) || DaoFactory.getUsersDao().findByUsername(username).getUsername().equals(username) || DaoFactory.getUsersDao().findByEmail(email).getEmail().equalsIgnoreCase(email)) {
+                response.sendRedirect("/register");
+            } else {
+                User user = new User(username, email, password);
+                DaoFactory.getUsersDao().insert(user);
+                try {
+                    if (DaoFactory.getUsersDao().findByUsername(user.getUsername()) != null) {
+                        request.getSession().setAttribute("user", user.getUsername());
+                        response.sendRedirect("/profile");
+                    } else {
+                        response.sendRedirect("/register");
+                    }
+                } catch (Exception e) {
                     response.sendRedirect("/register");
                 }
-            } catch (Exception e) {
-                response.sendRedirect("/register");
             }
+        } catch (IndexOutOfBoundsException e) {
+            response.sendRedirect("/register");
         }
     }
 }
