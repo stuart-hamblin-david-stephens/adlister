@@ -15,7 +15,7 @@ public class DeleteAdServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user") == null) {
+        if (request.getSession().getAttribute("user") == null || request.getSession().getAttribute("ad_id") == null) {
             request.getSession().setAttribute("redirect", "/ads/delete");
             response.sendRedirect("/login");
             return;
