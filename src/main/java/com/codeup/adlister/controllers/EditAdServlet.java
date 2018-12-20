@@ -14,6 +14,12 @@ import java.io.IOException;
 public class EditAdServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") == null || request.getSession().getAttribute("ad_id") == null) {
+            request.getSession().setAttribute("redirect", "/ads/edit");
+            response.sendRedirect("/login");
+            return;
+        }
+
         request.getRequestDispatcher("/WEB-INF/ads/edit-ad.jsp").forward(request, response);;
     }
 
