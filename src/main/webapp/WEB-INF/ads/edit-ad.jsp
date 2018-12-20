@@ -26,6 +26,9 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control" type="text">${sessionScope.ad_desc}</textarea>
         </div>
+        <%--<c:forEach var="ad" items="${ads.categories}">--%>
+            <%--Category A <input type="checkbox" name="categories" value="a">--%>
+        <%--</c:forEach>--%>
         <input type="submit" class="btn btn-block btn-primary" value="Edit ad">
     </form>
 </div>

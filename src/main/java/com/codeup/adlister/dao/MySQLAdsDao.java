@@ -183,4 +183,21 @@ public class MySQLAdsDao implements Ads {
         return userAds;
     }
 
+//    @Override
+//    public List<Strings> allCategories() {
+//        List<Ad> categories = new ArrayList<>();
+//        PreparedStatement stmt;
+//        String sql = "SELECT * FROM categories";
+//        try {
+//            stmt = conn.prepareStatement(sql);
+//            ResultSet rs = stmt.executeQuery();
+//            while(rs.next()){
+//                categories.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return ads;
+//    }
+
 }
