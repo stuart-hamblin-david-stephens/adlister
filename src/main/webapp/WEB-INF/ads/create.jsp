@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.codeup.adlister.dao.DaoFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,9 +20,14 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
-            <%--<c:forEach var="ad" items="${ads.categories}">--%>
-            <%--Category A <input type="checkbox" name="categories" value="a">--%>
-            <%--</c:forEach>--%>
+
+            <%--<% request.setAttribute("categories", DaoFactory.getAdsDao().allCategories());--%>
+            <%----%>
+            <%----%>
+            <%--%>--%>
+            <c:forEach items="${DaoFactory.getAdsDao().allCategories()}" var="category">
+                <p>${category}</p><input type="checkbox" name="categories" value=${category}>
+            </c:forEach>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>

@@ -29,23 +29,6 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-
-//    @Override
-//    public Long insert(Ad ad) {
-//        String sql = "INSERT INTO ads (user_id, title, description) VALUES (?, ?, ?)";
-//        try {
-//            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//            stmt.setLong(1, ad.getUserId());
-//            stmt.setString(2, ad.getTitle());
-//            stmt.setString(3, ad.getDescription());
-//            ResultSet rs = stmt.getGeneratedKeys();
-//            rs.next();
-//            return rs.getLong(1);
-//        } catch (SQLException e) {
-//            throw new RuntimeException("Error creating a new ad.", e);
-//        }
-//    }
-
     @Override
     public List<Ad> all() {
         List<Ad> ads = new ArrayList<>();
@@ -183,21 +166,22 @@ public class MySQLAdsDao implements Ads {
         return userAds;
     }
 
-//    @Override
-//    public List<Strings> allCategories() {
-//        List<Ad> categories = new ArrayList<>();
-//        PreparedStatement stmt;
-//        String sql = "SELECT * FROM categories";
-//        try {
-//            stmt = conn.prepareStatement(sql);
-//            ResultSet rs = stmt.executeQuery();
-//            while(rs.next()){
-//                categories.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return ads;
-//    }
+    @Override
+    public List<Integer> allCategories() {
+        List<Integer> categories = new ArrayList<>();
+        PreparedStatement stmt;
+        String sql = "SELECT id FROM categories";
+        try {
+            stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                System.out.println(rs.getInt("id"));
+                categories.add(rs.getInt("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories;
+    }
 
 }
