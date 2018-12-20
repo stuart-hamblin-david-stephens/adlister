@@ -21,4 +21,8 @@
         position: relative;
         left: 95px;
     }
+
+    .div-inline{
+        display:inline-block;
+    }
 </style>
