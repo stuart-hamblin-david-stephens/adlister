@@ -13,10 +13,12 @@ import java.io.IOException;
 public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
+            request.getSession().setAttribute("redirect", "/profile");
             response.sendRedirect("/login");
             return;
         }
 
+        request.getSession().removeAttribute("redirect");
         String currentUser = (String) request.getSession().getAttribute("user");
         System.out.println(currentUser);
         request.setAttribute("userAds", DaoFactory.getAdsDao().adsByUser(currentUser));

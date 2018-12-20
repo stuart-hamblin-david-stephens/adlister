@@ -45,12 +45,20 @@ public class RegisterServlet extends HttpServlet {
                 int newNumOfUsers = DaoFactory.getUsersDao().all().size();
 
                 if (newNumOfUsers == numOfUsers) {
+                    request.getSession().setAttribute("user_attempt", username);
                     response.sendRedirect("/login");
                 } else {
                     try {
                         if (DaoFactory.getUsersDao().findByUsername(user.getUsername()) != null) {
-                            request.getSession().setAttribute("user", user.getUsername());
-                            response.sendRedirect("/profile");
+                            if (DaoFactory.getUsersDao().findByEmail(user.getEmail()) != null) {
+                                request.getSession().setAttribute("user", user.getUsername());
+                                request.getSession().setAttribute("email", user.getEmail());
+                                request.getSession().removeAttribute("user_attempt");
+                                response.sendRedirect((String) request.getSession().getAttribute("redirect"));
+                            } else {
+                                request.getSession().setAttribute("user_attempt", username);
+                                response.sendRedirect("/register");
+                            }
                         } else {
                             response.sendRedirect("/register");
                         }
