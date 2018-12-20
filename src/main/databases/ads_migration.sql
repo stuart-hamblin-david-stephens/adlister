@@ -37,5 +37,4 @@ CREATE TABLE IF NOT EXISTS ad_categories (
   FOREIGN KEY (cat_id) REFERENCES categories (id),
   FOREIGN KEY (ad_id) REFERENCES ads (id)
 )
-
-SELECT * FROM categories;
+  SELECT id FROM categories;

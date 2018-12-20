@@ -11,7 +11,9 @@ public interface Ads {
     Long insert(Ad ad);
     // get a list of all ads by a particular user
     List<Ad> adsByUser(String username);
+
     List<Ad> adsByLikeUser(String username);
+
     List<Ad> adsWithTitle(String username);
 
     Ad findAdById(long id);
@@ -19,4 +21,7 @@ public interface Ads {
     Long deleteAd(long id);
 
     Long editAd(long id, String title, String description);
+
+    List<Integer> allCategories();
+
 }
