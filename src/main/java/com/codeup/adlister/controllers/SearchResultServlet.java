@@ -19,13 +19,19 @@ public class SearchResultServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int search_by = Integer.parseInt(request.getParameter("search-by"));
+        String query = request.getParameter("search-term");
 
         switch (search_by) {
             case 1:
+                    request.setAttribute("ads_search", DaoFactory.getAdsDao().adsWithTitle(query));
+                    request.getRequestDispatcher("/WEB-INF/search/result.jsp").forward(request, response);
                 break;
             case 2:
+                request.setAttribute("ads_search", DaoFactory.getAdsDao().adsByLikeUser(query));
+                request.getRequestDispatcher("/WEB-INF/search/result.jsp").forward(request, response);
                 break;
             case 3:
+                response.sendRedirect("/search");
                 break;
             default:
                 response.sendRedirect("/search");
