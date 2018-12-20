@@ -149,4 +149,38 @@ public class MySQLAdsDao implements Ads {
         return result;
     }
 
+    public List<Ad> adsWithTitle(String title) {
+        List<Ad> userAds = new ArrayList<>();
+        PreparedStatement stmt;
+        String sql = "SELECT * FROM ads WHERE title LIKE ?";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + title + "%");
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                userAds.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userAds;
+    }
+
+    public List<Ad> adsByLikeUser(String username) {
+        List<Ad> userAds = new ArrayList<>();
+        PreparedStatement stmt;
+        String sql = "SELECT * FROM ads WHERE user_id IN (SELECT id FROM users WHERE username LIKE ?)";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                userAds.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userAds;
+    }
+
 }
