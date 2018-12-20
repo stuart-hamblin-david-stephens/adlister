@@ -32,5 +32,6 @@
         <input type="submit" class="btn btn-block btn-primary" value="Edit ad">
     </form>
 </div>
+<jsp:include page="/WEB-INF/partials/script.jsp"/>
 </body>
 </html>

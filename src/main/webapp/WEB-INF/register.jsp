@@ -33,8 +33,9 @@
                 <label for="password-confirm">Confirm Password</label>
                 <input id="password-confirm" name="password-confirm" class="form-control" type="password">
             </div>
-            <input type="submit" class="btn btn-primary btn-block" value="Log In">
+            <input type="submit" class="btn btn-info btn-block" value="Sign Up">
         </form>
     </div>
+    <jsp:include page="/WEB-INF/partials/script.jsp"/>
 </body>
 </html>
