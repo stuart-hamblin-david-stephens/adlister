@@ -16,7 +16,7 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
     <h2 class="head-text">Edit the ad!</h2>
-    <form action="/ads/edit" method="post">
+    <form action="/ads/edit/confirm" method="post">
         <input type="hidden" name="ad_id" value="${sessionScope.ad_id}" style="display: none">
         <div class="form-group">
             <label for="title">Title</label>
@@ -26,7 +26,7 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control" type="text">${sessionScope.ad_desc}</textarea>
         </div>
-        <input type="submit" class="btn btn-block btn-primary">
+        <input type="submit" class="btn btn-block btn-primary" value="Edit ad">
     </form>
 </div>
 </body>

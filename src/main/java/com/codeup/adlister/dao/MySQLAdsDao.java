@@ -131,4 +131,22 @@ public class MySQLAdsDao implements Ads {
         }
         return result;
     }
+
+    @Override
+    public Long editAd(long id, String title, String description){
+        long result = 0;
+        PreparedStatement stmt;
+        String sql = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        try {
+            stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, title);
+            stmt.setString(2, description);
+            stmt.setLong(3, id);
+            result = stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

@@ -23,7 +23,6 @@ public class EditAdServlet extends HttpServlet {
         request.getSession().setAttribute("ad_id", ad.getId());
         request.getSession().setAttribute("ad_title", ad.getTitle());
         request.getSession().setAttribute("ad_desc", ad.getDescription());
-        response.sendRedirect("/ads/edit");
-//        request.getRequestDispatcher("/WEB-INF/ads/edit-ad.jsp").forward(request, response);;
+        request.getRequestDispatcher("/WEB-INF/ads/edit-ad.jsp").forward(request, response);
     }
 }
