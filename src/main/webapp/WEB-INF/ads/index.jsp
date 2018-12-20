@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>Here Are all the ads!</h1>
+    <h1 class="head-text">Here Are all the ads!</h1>
     <c:forEach var="ad" items="${ads}">
         <form id="submit-for-${ad.id}" action="" method="post">
             <div class="col-md-6" onclick="javascript:document.getElementById('submit-for-${ad.id}').submit();">
