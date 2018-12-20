@@ -39,7 +39,11 @@ public class LoginServlet extends HttpServlet {
                     request.getSession().setAttribute("user", user.getUsername());
                     request.getSession().setAttribute("email", user.getEmail());
                     request.getSession().removeAttribute("user_attempt");
-                    response.sendRedirect((String) request.getSession().getAttribute("redirect"));
+                    if (request.getSession().getAttribute("redirect") != null) {
+                        response.sendRedirect((String) request.getSession().getAttribute("redirect"));
+                    } else {
+                        response.sendRedirect("/profile");
+                    }
                 } else {
                     request.getSession().setAttribute("user_attempt", username);
                     response.sendRedirect("/login");

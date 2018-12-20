@@ -4,7 +4,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header head-text">
             <a class="navbar-brand" href="/ads">
-                <img src="<%= request.getContextPath()%>/img/sticker-logo.png" alt="funny octoman" class="logo">
+                <img src="https://media.discordapp.net/attachments/248329263462219776/525415008708853776/sticker-logo.png?width=600&height=600" alt="funny octoman" class="logo">
                 <p class="text-logo">Fixer Lister</p>
             </a>
         </div>
