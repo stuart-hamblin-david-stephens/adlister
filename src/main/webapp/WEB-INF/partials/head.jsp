@@ -12,6 +12,7 @@
 
     .logo {
         max-width: 100px;
+        height: auto;
         position: absolute;
         top: 4px;
         left: 4px;
@@ -24,5 +25,9 @@
 
     .div-inline{
         display:inline-block;
+    }
+
+    .oops {
+        max-width: 200px;
     }
 </style>
