@@ -19,7 +19,7 @@
         <form action="/register" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
+                <input id="username" name="username" class="form-control" type="text" value="${sessionScope.user_attempt}">
             </div>
             <div class="form-group">
                 <label for="email">E-Mail</label>

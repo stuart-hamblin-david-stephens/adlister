@@ -15,6 +15,12 @@ import java.io.IOException;
 public class EditProfileServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("user") == null) {
+            request.getSession().setAttribute("redirect", "/profile/edit");
+            response.sendRedirect("/login");
+            return;
+        }
+        request.getSession().removeAttribute("redirect");
         request.getRequestDispatcher("/WEB-INF/edit-profile.jsp").forward(request, response);
     }
 

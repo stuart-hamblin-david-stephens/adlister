@@ -38,11 +38,14 @@ public class LoginServlet extends HttpServlet {
                 if (BCrypt.checkpw(password, user.getPassword())) {
                     request.getSession().setAttribute("user", user.getUsername());
                     request.getSession().setAttribute("email", user.getEmail());
-                    response.sendRedirect("/profile");
+                    request.getSession().removeAttribute("user_attempt");
+                    response.sendRedirect((String) request.getSession().getAttribute("redirect"));
                 } else {
+                    request.getSession().setAttribute("user_attempt", username);
                     response.sendRedirect("/login");
                 }
             } catch (Exception e) {
+                request.getSession().setAttribute("user_attempt", username);
                 response.sendRedirect("/register");
             }
         }
