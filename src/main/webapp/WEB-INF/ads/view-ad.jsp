@@ -18,6 +18,6 @@
     </div>
 
 </div>
-
+<jsp:include page="/WEB-INF/partials/script.jsp"/>
 </body>
 </html>

@@ -39,5 +39,6 @@
             </div>
         </c:forEach>
     </div>
+    <jsp:include page="/WEB-INF/partials/script.jsp"/>
 </body>
 </html>

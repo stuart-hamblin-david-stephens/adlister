@@ -11,5 +11,6 @@
     <div class="container">
         <h1 class="head-text">Welcome to the Fixer Lister!</h1>
     </div>
+    <jsp:include page="/WEB-INF/partials/script.jsp"/>
 </body>
 </html>

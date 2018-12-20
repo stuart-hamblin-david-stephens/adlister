@@ -15,5 +15,6 @@
         <img src="https://media.discordapp.net/attachments/248329263462219776/525415041030291467/sigh.gif" alt="oh no..." class="oops">
     </div>
 </div>
+<jsp:include page="/WEB-INF/partials/script.jsp"/>
 </body>
 </html>

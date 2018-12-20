@@ -30,6 +30,6 @@
             <button type="submit" class="btn btn-info btn-block my-2">Submit</button>
         </form>
     </div>
-
+    <jsp:include page="/WEB-INF/partials/script.jsp"/>
 </body>
 </html>

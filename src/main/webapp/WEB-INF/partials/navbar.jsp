@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default sticky-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header head-text">
@@ -9,17 +9,17 @@
             </a>
         </div>
         <ul class="nav navbar-nav navbar-right head-text">
-            <li><a href="/search">Search Ads</a></li>
+            <li class="nav-item"><a href="/search" class="nav-link">Search Ads</a></li>
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/profile/edit">Edit Profile</a></li>
-                    <li><a href="/ads/create">Create New Ad</a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+                    <li class="nav-item"><a href="/profile/edit" class="nav-link">Edit Profile</a></li>
+                    <li class="nav-item"><a href="/ads/create" class="nav-link">Create New Ad</a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="/register">Register</a></li>
-                    <li><a href="/login">Login</a></li>
+                    <li class="nav-item"><a href="/register" class="nav-link">Register</a></li>
+                    <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
                 </c:otherwise>
             </c:choose>
         </ul>
