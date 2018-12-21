@@ -20,6 +20,15 @@ public class EditConfirmAdServlet extends HttpServlet {
         String ad_title = request.getParameter("title");
         String ad_desc = request.getParameter("description");
         DaoFactory.getAdsDao().editAd(ad_id, ad_title, ad_desc);
+        DaoFactory.getCatDao().delete(ad_id);
+        String[] cat_ids= request.getParameterValues("categories");
+        int[] cat_ints = new int[cat_ids.length];
+        for (int i = 0; i < cat_ints.length; i++){
+            cat_ints[i] = Integer.parseInt(cat_ids[i]);
+        }
+        for (int cat : cat_ints) {
+            DaoFactory.getCatDao().add(ad_id, cat);
+        }
         response.sendRedirect("/profile");
     }
 }

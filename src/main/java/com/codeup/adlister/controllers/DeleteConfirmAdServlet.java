@@ -21,6 +21,7 @@ public class DeleteConfirmAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long ad_id = (long) request.getSession().getAttribute("ad_id");
         DaoFactory.getAdsDao().deleteAd(ad_id);
+        DaoFactory.getCatDao().delete(ad_id);
         response.sendRedirect("/profile");
     }
 }
