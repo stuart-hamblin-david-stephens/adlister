@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.codeup.adlister.dao.DaoFactory" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: stuart
@@ -26,10 +29,15 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control" type="text">${sessionScope.ad_desc}</textarea>
         </div>
-        <%--<c:forEach var="ad" items="${ads.categories}">--%>
-            <%--Category A <input type="checkbox" name="categories" value="a">--%>
-        <%--</c:forEach>--%>
-        <input type="submit" class="btn btn-block btn-primary" value="Edit ad">
+        <div class="div-inline text-center">
+            <c:forEach items="${DaoFactory.getCatDao().all()}" var="category">
+                <div class="div-inline">
+                    <input class="form-check-input" type="checkbox" name="categories" id="category-${category.id}" value=${category.id}><label class="form-check-label" for="category-${category.id}">&nbsp;${category.title}&nbsp;&nbsp;&nbsp;</label>
+                </div>
+            </c:forEach>
+        </div>
+        <br>
+        <input type="submit" class="btn btn-block btn-info" value="Edit ad">
     </form>
 </div>
 <jsp:include page="/WEB-INF/partials/script.jsp"/>

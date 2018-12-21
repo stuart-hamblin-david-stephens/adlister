@@ -25,10 +25,15 @@
             <%----%>
             <%----%>
             <%--%>--%>
-            <c:forEach items="${DaoFactory.getAdsDao().allCategories()}" var="category">
-                <p>${category}</p><input type="checkbox" name="categories" value=${category}>
+            <div class="div-inline text-center">
+            <c:forEach items="${DaoFactory.getCatDao().all()}" var="category">
+                <div class="div-inline">
+                    <input class="form-check-input" type="checkbox" name="categories" id="category-${category.id}" value=${category.id}><label class="form-check-label" for="category-${category.id}">&nbsp;${category.title}&nbsp;&nbsp;&nbsp;</label>
+                </div>
             </c:forEach>
-            <input type="submit" class="btn btn-block btn-primary">
+            </div>
+            <br>
+            <input type="submit" class="btn btn-block btn-info">
         </form>
     </div>
     <jsp:include page="/WEB-INF/partials/script.jsp"/>

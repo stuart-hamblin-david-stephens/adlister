@@ -55,10 +55,15 @@ public class MySQLAdsDao implements Ads {
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
-            bill = stmt.executeUpdate();
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            while (rs.next()) {
+                bill = rs.getLong(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println(bill);
         return bill;
     }
 
@@ -164,24 +169,6 @@ public class MySQLAdsDao implements Ads {
             e.printStackTrace();
         }
         return userAds;
-    }
-
-    @Override
-    public List<Integer> allCategories() {
-        List<Integer> categories = new ArrayList<>();
-        PreparedStatement stmt;
-        String sql = "SELECT id FROM categories";
-        try {
-            stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                System.out.println(rs.getInt("id"));
-                categories.add(rs.getInt("id"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return categories;
     }
 
 }

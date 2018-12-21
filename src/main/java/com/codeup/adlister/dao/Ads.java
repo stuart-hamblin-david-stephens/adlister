@@ -22,6 +22,4 @@ public interface Ads {
 
     Long editAd(long id, String title, String description);
 
-    List<Integer> allCategories();
-
 }
