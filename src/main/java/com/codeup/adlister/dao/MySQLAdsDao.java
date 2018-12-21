@@ -8,7 +8,9 @@ import java.io.InputStream;
 import com.codeup.adlister.Config;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class MySQLAdsDao implements Ads {
@@ -160,7 +162,7 @@ public class MySQLAdsDao implements Ads {
         String sql = "SELECT * FROM ads WHERE user_id IN (SELECT id FROM users WHERE username LIKE ?)";
         try {
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, username);
+            stmt.setString(1, "%" + username + "%");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 userAds.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
@@ -171,4 +173,40 @@ public class MySQLAdsDao implements Ads {
         return userAds;
     }
 
+    public List<Ad> adsWithCategory(String category) {
+        List<Ad> userAds = new ArrayList<>();
+        PreparedStatement stmt;
+        String sql = "SELECT * FROM ads WHERE id IN (SELECT ad_id FROM ad_categories WHERE cat_id IN (SELECT id FROM categories WHERE title LIKE ?))";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + category + "%");
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                userAds.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userAds;
+    }
+
+    @Override
+    public List<Ad> masterSearch(String query) {
+        List<Ad> userAds = new ArrayList<>();
+        PreparedStatement stmt;
+        String sql = "SELECT * FROM ads WHERE title LIKE ? || user_id IN (SELECT id FROM users WHERE username LIKE ?) || id IN (SELECT ad_id FROM ad_categories WHERE cat_id IN (SELECT id FROM categories WHERE title LIKE ?))";
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, "%" + query + "%");
+            stmt.setString(2, "%" + query + "%");
+            stmt.setString(3, "%" + query + "%");
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                userAds.add(new Ad(rs.getLong("id"), rs.getLong("user_id"), rs.getString("title"), rs.getString("description")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userAds;
+    }
 }

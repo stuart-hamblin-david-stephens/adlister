@@ -31,10 +31,12 @@ public class SearchResultServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/search/result.jsp").forward(request, response);
                 break;
             case 3:
-                response.sendRedirect("/search");
+                request.setAttribute("ads_search", DaoFactory.getAdsDao().adsWithCategory(query));
+                request.getRequestDispatcher("/WEB-INF/search/result.jsp").forward(request, response);
                 break;
             default:
-                response.sendRedirect("/search");
+                request.setAttribute("ads_search", DaoFactory.getAdsDao().masterSearch(query));
+                request.getRequestDispatcher("/WEB-INF/search/result.jsp").forward(request, response);
                 break;
         }
 

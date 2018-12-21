@@ -16,9 +16,10 @@
                 <div class="col-md-4">
                     <label class="mr-sm-2" for="search-by">Search by</label>
                     <select class="form-control mr-sm-2 col-2" id="search-by" name="search-by">
-                        <option value="1" selected>Title</option>
+                        <option value="1">Title</option>
                         <option value="2">User</option>
                         <option value="3">Category</option>
+                        <option value="4" selected>Search All Options</option>
                     </select>
                 </div>
                 <div class="col-md-8">

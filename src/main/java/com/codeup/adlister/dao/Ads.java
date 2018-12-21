@@ -16,6 +16,10 @@ public interface Ads {
 
     List<Ad> adsWithTitle(String username);
 
+    List<Ad> adsWithCategory(String username);
+
+    List<Ad> masterSearch(String query);
+
     Ad findAdById(long id);
 
     Long deleteAd(long id);
